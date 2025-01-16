@@ -132,7 +132,13 @@ def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi')):
 
 
 def load_all_fonts(directory, accept=('.ttf')):
-    return load_all_music(directory, accept)
+    fonts = {}
+    for font in os.listdir(directory):
+        name, ext = os.path.splitext(font)
+        if ext.lower() in accept:
+            fonts[name] = pg.font.Font(os.path.join(directory, font), 16)  # 假设字体大小为16
+    return fonts
+
 
 
 def load_all_sfx(directory, accept=('.wav','.mpe','.ogg','.mdi')):
